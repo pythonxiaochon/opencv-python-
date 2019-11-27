@@ -1,0 +1,21 @@
+import cv2 as cv
+import numpy as np
+
+cap = cv.VideoCapture(0)
+camer = cv.VideoWriter_fourcc(*"XVID")  #调用XVID编码器（还有一种MPEF1编码器）
+out = cv.VideoWriter("camer.MP4",camer,30.0,(640,480))
+
+while True:
+    set,frame = cap.read()
+    frame = cv.flip(frame,1)  #将图像进行对称转换
+    gray = cv.cvtColor(frame,cv.COLOR_BGR2GRAY)   #将图像转为灰度图像
+    out.write(frame)
+    cv.imshow("frame",frame)
+    cv.imshow("gray",gray)
+
+    if cv.waitKey(10) & 0xFF == ord("l"):  #waitKey(x) x的数值如果为0则图像不会动
+        break
+
+cap.release()
+out.release()
+cv.destoryAllWindows()
