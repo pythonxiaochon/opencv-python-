@@ -1,0 +1,23 @@
+import cv2 as cv
+import numpy as np
+
+#
+#img = cv.imread("D:/QQ20191120204856.jpg",img)
+img = np.zeros((1000,1000,3),np.uint8)  #创建一个黑色背景
+cv.line(img,(50,50),(210,210),(255,0,0),4)
+cv.circle(img,(210,210),50,(0,0,255),1)     #-1为向内填充颜色，1为画一个圆
+cv.rectangle(img,(350,0),(500,128),(0,255,255),8)  #写入左上角坐标和右下角坐标，最后一个数是线框宽度
+cv.ellipse(img,(210,210),(50,100),0,0,360,(255,0,0),1)  #画椭圆，给定中心点坐标，再给（实轴长，虚轴长），图像旋转角度，起始角度
+#给定每个点的坐标，然后就行
+pts=np.array([[10,5],[20,30],[70,20]],np.int32)
+pts = pts.reshape((-1,1,2))
+#这里reshape的第一个参数为-1，表明这一维度的长度是根据后面的维度计算出来的
+cv.polylines(img,[pts],True,(0,255,255),10)  #10是指线的粗细
+font = cv.FORMATTER_FMT_PYTHON  #字体
+cv.putText(img,"LOVE ME",(100,300),font,4,(255,0,255),2,cv.LINE_AA) #文字内容，绘制的位置，字体、大小、颜色、线条粗细、类型等
+
+cv.namedWindow("image",cv.WINDOW_NORMAL)
+cv.resizeWindow("image",500,500)
+cv.imshow("image",img)
+cv.waitKey(0)
+cv.destoryAllWindows()
