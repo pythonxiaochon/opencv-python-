@@ -1,0 +1,29 @@
+import cv2 as cv
+import numpy as np
+
+
+def blur_demo(image):
+    dst = cv.blur(image, (5, 5))  #均值模糊  （5,5）指X方向模糊5,y方向模糊5
+    cv.imshow("blur_demo", dst)
+
+
+def median_blur_demo(image):
+    dst = cv.medianBlur(image, 5)  #中指模糊  5模糊代表模糊力度
+    cv.imshow("median_blur_demo", dst)
+
+
+def custom_blur_demo(image):
+    #kernel = np.ones([5, 5], np.float32)/25
+    kernel = np.array([[0, 1, 0],[1, -4, 1],[0, 1, 0]], np.float32)   #模糊算子 要求为奇数 总和等于0的时候一般都是做梯度  等于1一般是增强工作
+    dst = cv.filter2D(image, -1, kernel=kernel)  #自定义模糊  -1不能变，kernel代表自定义模糊算子
+    cv.imshow("custom_blur_demo", dst)
+
+
+print("--------- Hello Python ---------")
+src = cv.imread("D:/-5e61515b5cfdc1c3.jpg")
+cv.namedWindow("input image", cv.WINDOW_AUTOSIZE)
+cv.imshow("input image", src)
+custom_blur_demo(src)
+cv.waitKey(0)
+
+cv.destroyAllWindows()
