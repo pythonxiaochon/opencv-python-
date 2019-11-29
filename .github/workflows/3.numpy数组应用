@@ -1,0 +1,64 @@
+import cv2 as cv
+import numpy as np
+
+
+def access_pixels(image):
+    print(image.shape);
+    height,width,channels = image.shape  #输出image图像的长度，宽度，通道数
+    #width = image.shape[1]
+    #channels = image.shape[2]
+    print("width : %s, height : %s channels : %s"%(width, height, channels))
+    #将图像进行反向   
+    for row in range(height):
+        for col in range(width):
+            for c in range(channels):
+                pv = image[row, col, c]
+                image[row, col, c] = 255 - pv  
+    cv.imshow("pixels_demo", image)
+    cv.waitKey(30)
+
+
+def inverse(image):
+    dst = cv.bitwise_not(image)
+    cv.imshow("inverse demo", dst)
+
+
+def create_image():
+
+    img = np.zeros([400, 400, 3], np.uint8)  #创建一个【400,400】三个颜色通道的空白图层
+    #img[: , : , 0] = np.ones([400, 400])*255
+    img[:, :, 2] = np.ones([400, 400]) * 255   #每个像素都乘上255
+    cv.imshow("new image", img)
+
+    img = np.ones([400, 400, 1], np.uint8)
+    img = img * 0
+    cv.imshow("new image", img)
+    cv.imwrite("D:/myImage.png", img)
+
+    m1 = np.ones([3, 3], np.uint8) # 创建3*3的数组来保持189  但最大只能是190
+    m1.fill(189)
+    print(m1)
+
+    m2 = m1.reshape([1, 9])  #将m1中的数组变为1行9列的数组
+    print(m2)
+
+    m3 = np.array([[2,3,4], [4,5,6],[7,8,9]], np.int32) #创建numpy的整数型数组
+    #m3.fill(9)
+    print(m3)
+
+print("--------- Hello Python ---------")
+src = cv.imread("D:/-5e61515b5cfdc1c3.jpg") # blue, green red
+cv.namedWindow("input image", cv.WINDOW_AUTOSIZE)
+cv.imshow("input image", src)
+create_image()
+access_pixels(src)
+#输出执行总共花费的时间
+t1 = cv.getTickCount()
+print(t1)
+t2 = cv.getTickCount()  #计算从执行代码时间
+print(t2)
+time = (t2-t1)/cv.getTickFrequency()  #计算处理图片花的时间
+print("time : %s ms"%(time*1000))
+cv.waitKey(0)
+
+cv.destroyAllWindows()
