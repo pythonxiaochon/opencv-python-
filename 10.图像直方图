@@ -1,0 +1,27 @@
+import cv2 as cv
+import numpy as np
+from matplotlib import pyplot as plt  #直方图的库
+
+
+def plot_demo(image):
+    plt.hist(image.ravel(), 100, [0, 256])  #ravel()是统计次数  100代表列出100条线  【0,256】是指横轴范围
+    plt.show("直方图")
+
+
+def image_hist(image):
+    color = ('blue', 'green', 'red')
+    for i, color in enumerate(color):  #从容器中进行迭代
+        hist = cv.calcHist([image], [i], None, [256], [0, 256])  #直方图
+        plt.plot(hist, color=color)  #画出图片
+        plt.xlim([0, 255])  #x轴的范围
+    plt.show()  #展示直方图
+
+
+print("--------- Hello Python ---------")
+src = cv.imread("D:/-5e61515b5cfdc1c3.jpg")
+cv.namedWindow("input image", cv.WINDOW_AUTOSIZE)
+cv.imshow("input image", src)
+image_hist(src)
+cv.waitKey(0)
+
+cv.destroyAllWindows()
