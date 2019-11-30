@@ -1,0 +1,22 @@
+import cv2 as cv
+import numpy as np
+
+
+def bi_demo(image):
+    dst = cv.bilateralFilter(image, 0, 255, 10)   #  双边模糊（只针对内容模糊，保留边缘）  10邻域直径一般取0，255这个数一般取大点，100一般取小点
+    cv.imshow("bi_demo", dst)
+
+
+def shift_demo(image):
+    dst = cv.pyrMeanShiftFiltering(image, 50, 10)  #均值迁移 只对差异比较小的边缘处理  50是模糊半径，10是指漂移路径大小
+    cv.imshow("shift_demo", dst)
+
+
+print("--------- Hello Python ---------")
+src = cv.imread("D:/-5e61515b5cfdc1c3.jpg")
+cv.namedWindow("input image", cv.WINDOW_AUTOSIZE)
+cv.imshow("input image", src)
+shift_demo(src)
+cv.waitKey(0)
+
+cv.destroyAllWindows()
