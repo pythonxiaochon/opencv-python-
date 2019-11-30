@@ -1,0 +1,35 @@
+import cv2 as cv
+import numpy as np
+
+
+def threshold_demo(image):
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    ret, binary = cv.threshold(gray, 127, 255, cv.THRESH_BINARY|cv.THRESH_OTSU)  #全部阈值法，一般很容易被影响，不好控制  127是均值
+    print("threshold value %s"%ret)
+    cv.imshow("binary", binary)
+
+
+def local_threshold(image):
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    binary = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C, cv.THRESH_BINARY, 25, 10)    #局部阈值法  25这个数必须为奇数  比均值大10就变黑，小10就变白
+    cv.imshow("binary", binary)
+
+
+def custom_threshold(image):
+    gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+    h, w = gray.shape[:2]
+    m = np.reshape(gray, [1, w*h])  #把gray变成1维的数组
+    mean = m.sum() / (w*h)  #算出均值
+    print("mean : ", mean)
+    ret, binary = cv.threshold(gray, mean, 255, cv.THRESH_BINARY)  #自己定义阈值法分割
+    cv.imshow("binary", binary)
+
+
+print("--------- Python OpenCV Tutorial ---------")
+src = cv.imread("D:/-5e61515b5cfdc1c3.jpg")
+cv.namedWindow("input image", cv.WINDOW_AUTOSIZE)
+cv.imshow("input image", src)
+custom_threshold(src)
+cv.waitKey(0)
+
+cv.destroyAllWindows()
