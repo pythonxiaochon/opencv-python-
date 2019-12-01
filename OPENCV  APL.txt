@@ -1,0 +1,70 @@
+          数字27是退出的意思  B =0     G = 1    R = 2
+cv.imshow()  显示图片
+cv.imread()  读取文件中的图片
+cv.inwrite()  保存图片
+cv.namedwindow(“   ”，cv.WINDOW_AUTOSIZE)   调用窗口显示图片
+cv.waitKey()    等待运行时间
+cv.destroyAllwindows()  关闭窗口
+cv.VideoCapture()   获取视频
+cv.flip()    对每个像素进行填充数字
+cv.cvtColor(    ，cv.COLOR_BGR2GRAY)   
+cv.bitwise_not()     对像素进行“非”运算，并且提高代码的运行速度
+cv.bitwise_and()    对像素进行二进制“与”的操作，白色区域保留，黑色剔除
+cv.bitwise_or()    对像素进行“或”运算
+cv.getTickCount()    从开始到结束计算机运行的时间
+cv.inRange()      对RGB到HSV（可以追踪颜色）颜色的转换
+b,g,r = cv.split()    分离照片RGB三个通道
+cv.merge()    合并三个颜色通道
+cv.add()  照片像素增加
+cv.subtract()  像素相减
+cv.divide()   像素相乘
+cv.multiply()   像素相除
+cv.mean()  求平均值
+cv.meanStdDev()  求像素方差
+cv.addweighted()   增加亮度和对比度
+cv.floodfill()  填充某一区域内的像素
+cv.blur()  均值模糊
+cv.medianBlur()   中值模糊
+cv.fliter2D()   自定义模糊
+cv.GaussianBlur()  高斯模糊
+cv.bilateralFilter()  边缘保留滤波模糊
+cv.matchTemplate()  两章图片匹配度比较
+cv.minMaxLoc()  确定那个位置匹配最佳（确定模板在图片的位置）
+cv.rectangle()  绘制矩形框
+cv.threshold()  全部阈值
+cv.adaptiveThreshold()  局部阈值
+cv.pyMeanShiftFilering()  照片除燥
+cv.pyrDown() 高斯金字塔（降采样）
+cv.pyrUp()  还原
+cv.subtract()  拉普拉斯金字塔
+cv.Sobel()  计算颜色梯度
+cv.Canny()  canny边缘提取
+cv.HoughLines()  霍夫直线检测
+膨胀（黑色区域变小）
+cv.getStructuring()  #获取形态学元素
+cv.dilate()
+腐蚀(黑色变大)
+cv.getStructuringElement()
+cv.erode()  
+开操作=腐蚀+膨胀 （填充空白区域，可去除一下小点）
+cv.getStructuringElement()
+cv.morphologyEx(crg,cv.MORPH_OPEN,) 形态学操作
+闭操作=膨胀+腐蚀（填充闭合区域）
+cv.getStructuringElement()
+cv.morphologyEx(crg,cv.MORPH_CLOSE,) 形态学操作
+顶帽（原图像与开操作之间的差值）
+cv.morphologyEx(crg,cv.MORPH_TOPHAT,)
+黑帽（原图像与闭操作之间的差值）
+cv.morphologyEx(crg,cv.MORPH_BLACKHAT,)
+形体学梯度（基本梯度：膨胀后图像减去腐蚀后图像
+	内部梯度：原图减去腐蚀后图片
+	外部梯度：膨胀后图片减去原图）
+cv.morphologyEx(crg,cv.MORPH_GRADTENT,)
+分水岭算法（把图片每个像素之间的梯度标记出来）
+      输入图片（最好除燥）-灰度图片-二值化-距离变换-寻找种子-生成Markers-分水岭变换
+cv.distanceTransform()  距离变换
+cv.connectedComponents()  求markers
+cv.watershed()  输出分水岭
+
+cv.bitwise_not()  把黑色背景变为白色背景
+image.fromarray()  把数据变成电脑可以接受的
